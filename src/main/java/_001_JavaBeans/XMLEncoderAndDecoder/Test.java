@@ -18,10 +18,10 @@ public class Test {
         XMLEncoder xmlEncoder;
 
         try {
-            xmlEncoder = getEncoder("file");
+            xmlEncoder = getEncoder(XMLEncoderEnum.FROM_FILE);
 
 
-            final PersistenceDelegate persistenceDelegate = getPersistenceDelegate("default");
+            final PersistenceDelegate persistenceDelegate = getPersistenceDelegate(PDEnum.DEFAULT);
             if (persistenceDelegate != null){
                 xmlEncoder.setPersistenceDelegate(Example.class,persistenceDelegate);
             }
@@ -36,22 +36,22 @@ public class Test {
 
     }
 
-    private static XMLEncoder getEncoder(String mode) throws FileNotFoundException {
+    private static XMLEncoder getEncoder(XMLEncoderEnum mode) throws FileNotFoundException {
         if (mode == null){
             return null;
         }
 
         XMLEncoder encoder = null;
         switch (mode){
-            case "sout": encoder = new XMLEncoder(System.out); break;
-            case "file": encoder = new XMLEncoder(
+            case SYSTEM_OUT: encoder = new XMLEncoder(System.out); break;
+            case FROM_FILE: encoder = new XMLEncoder(
                     new BufferedOutputStream(
                             new FileOutputStream("Test.xml")));
         }
         return encoder;
     }
 
-    private static PersistenceDelegate getPersistenceDelegate(String mode){
+    private static PersistenceDelegate getPersistenceDelegate(PDEnum mode){
 
         if (mode == null){
             return null;
@@ -59,11 +59,11 @@ public class Test {
 
         PersistenceDelegate persistenceDelegate = null;
         switch (mode){
-            case "default" :  break;
-            case "defaultPDwithDescription":
+            case DEFAULT: break;
+            case DEFAULT_PD_DESCRIPTION:
                 persistenceDelegate = new DefaultPersistenceDelegate(new String[]{"description"});
                 break;
-            case "customPD":
+            case CUSTOM_PD:
                 persistenceDelegate = new PersistenceDelegate() {
                     @Override
                     protected Expression instantiate(Object oldInstance, Encoder out) {
@@ -76,5 +76,13 @@ public class Test {
                  break;
         }
         return persistenceDelegate;
+    }
+
+    private enum PDEnum{
+        DEFAULT, DEFAULT_PD_DESCRIPTION, CUSTOM_PD
+    }
+
+    private enum XMLEncoderEnum{
+        SYSTEM_OUT, FROM_FILE
     }
 }
