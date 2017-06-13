@@ -15,10 +15,10 @@ public class Test {
 
         Example temp = new Example(1,"Pies");
         Example content = new Example(1,"Al2a",temp);
-        String transientProperty = "description";
+        String transientProperty = "";
         try {
 
-            final XMLEncoder xmlEncoder = getEncoder(XMLEncoderEnum.FROM_FILE);
+            final XMLEncoder xmlEncoder = getEncoder(XMLEncoderEnum.TO_FILE);
             final PersistenceDelegate persistenceDelegate = getPersistenceDelegate(PDEnum.DEFAULT);
             if (persistenceDelegate != null){
                 xmlEncoder.setPersistenceDelegate(Example.class,persistenceDelegate);
@@ -55,7 +55,7 @@ public class Test {
         XMLEncoder encoder = null;
         switch (mode){
             case SYSTEM_OUT: encoder = new XMLEncoder(System.out); break;
-            case FROM_FILE: encoder = new XMLEncoder(
+            case TO_FILE: encoder = new XMLEncoder(
                     new BufferedOutputStream(
                             new FileOutputStream("Test.xml")));
         }
@@ -94,6 +94,6 @@ public class Test {
     }
 
     private enum XMLEncoderEnum{
-        SYSTEM_OUT, FROM_FILE
+        SYSTEM_OUT, TO_FILE
     }
 }
