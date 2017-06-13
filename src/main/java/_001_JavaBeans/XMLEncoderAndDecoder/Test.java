@@ -15,18 +15,18 @@ public class Test {
 
         Example temp = new Example(1,"Pies");
         Example content = new Example(1,"Al2a",temp);
-        XMLEncoder xmlEncoder;
-
+        String transientProperty = "description";
         try {
-            xmlEncoder = getEncoder(XMLEncoderEnum.FROM_FILE);
 
-
+            final XMLEncoder xmlEncoder = getEncoder(XMLEncoderEnum.FROM_FILE);
             final PersistenceDelegate persistenceDelegate = getPersistenceDelegate(PDEnum.DEFAULT);
             if (persistenceDelegate != null){
                 xmlEncoder.setPersistenceDelegate(Example.class,persistenceDelegate);
             }
+            setPropertiesTransient(Example.class, transientProperty);
+
+
             xmlEncoder.writeObject(content);
-            System.out.println(content);
             xmlEncoder.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,6 +34,17 @@ public class Test {
 
 
 
+    }
+
+    private static void setPropertiesTransient(Class clas,String property) throws IntrospectionException {
+        if (clas == null || property == null){
+            return;
+        }
+        BeanInfo info = Introspector.getBeanInfo(clas);
+        PropertyDescriptor[] propertyDescriptors = info.getPropertyDescriptors();
+        for (PropertyDescriptor pd : propertyDescriptors)
+            if (pd.getName().equals(property))
+                pd.setValue("transient", Boolean.TRUE);
     }
 
     private static XMLEncoder getEncoder(XMLEncoderEnum mode) throws FileNotFoundException {
