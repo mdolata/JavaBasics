@@ -5,7 +5,11 @@ import java.io.Serializable;
 
 /**
  * Created by mdolat on 11.06.2017 , 22:19.
- *
+ * It's a bean.
+ * From Java docs, bean should have
+ * private properties and getters and setters,
+ * non-argument constructor,
+ * and be serializable
  */
 public class Example implements Serializable{
     private Integer value;
