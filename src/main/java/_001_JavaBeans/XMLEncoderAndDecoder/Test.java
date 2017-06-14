@@ -1,9 +1,7 @@
 package _001_JavaBeans.XMLEncoderAndDecoder;
 
 import java.beans.*;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 
 /**
  * Created by mdolat on 11.06.2017 , 22:09 , 19:36.
@@ -57,7 +55,7 @@ public class Test {
             case SYSTEM_OUT: encoder = new XMLEncoder(System.out); break;
             case TO_FILE: encoder = new XMLEncoder(
                     new BufferedOutputStream(
-                            new FileOutputStream("Test.xml")));
+                            new FileOutputStream("Test.xml"))); break;
         }
         return encoder;
     }

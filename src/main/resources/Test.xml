@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_121" class="java.beans.XMLDecoder">
+ <object class="_001_JavaBeans.XMLEncoderAndDecoder.Example">
+  <void property="description">
+   <string>Al2a</string>
+  </void>
+  <void property="example">
+   <object class="_001_JavaBeans.XMLEncoderAndDecoder.Example">
+    <void property="description">
+     <string>Pies</string>
+    </void>
+    <void property="value">
+     <int>1</int>
+    </void>
+   </object>
+  </void>
+  <void property="value">
+   <int>1</int>
+  </void>
+ </object>
+<object class="_001_JavaBeans.XMLEncoderAndDecoder.DecoderExploit">
+ <string>ALA</string>
+ <int>10</int>
+ <method name = "Printer">
+  <string>Param</string>
+ </method>
+ <method name = "PrintNumber">
+
+ </method>
+</object>
+</java>

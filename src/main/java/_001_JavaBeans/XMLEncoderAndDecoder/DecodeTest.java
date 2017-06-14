@@ -15,7 +15,7 @@ public class DecodeTest {
         try {
             XMLDecoder xmlDecoder = new XMLDecoder(
                     new BufferedInputStream(
-                            new FileInputStream("Test.xml")
+                            new FileInputStream("TestExploit.xml")
                     )
             );
 
